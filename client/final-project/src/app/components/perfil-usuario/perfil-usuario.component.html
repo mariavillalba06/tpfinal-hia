@@ -1,0 +1,79 @@
+<div class="container">
+    <h2 class="text-center">Bienvenido {{userInfo.nombre}} {{userInfo.apellido}}!</h2>
+    <div class="row">
+        <div class="user-info col-12">
+            <h3>Informacion de usuario</h3>
+            <div class="user-panel row shadow">
+                <div class="col-6">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item separador"><strong>Nombre: </strong> {{userInfo.nombre}} </li>
+                        <li class="list-group-item separador"><strong>Apellido: </strong> {{userInfo.apellido}} </li>
+                        <li class="list-group-item separador"><strong>DNI: </strong> {{userInfo.dni}} </li>
+                        <li class="list-group-item separador"><strong>Domicilio: </strong> {{userInfo.domicilio}}</li>
+                        <li class="list-group-item separador" *ngIf="userType=='medico'"><strong>Especialidad:
+                                </strong> {{userInfo.especialidad}} </li>
+                        <li class="list-group-item separador" *ngIf="userType=='medico'"><strong>Matricula:</strong> {{userInfo.matricula}} </li>
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <h5>Contactos:</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item separador" *ngFor="let contacto of userInfo.contactos"> <strong>{{contacto.tipo}}:</strong> {{ contacto.valor }}</li>
+                        <li class="list-group-item separador"></li>
+                    </ul>
+                </div>
+            </div>
+            <button type="button" class="btn button-profile" (click)="modificar(userInfo)">Editar datos</button>
+        </div>
+        <div class="user-turnos col-12">
+            <h3>Turnos</h3>
+            <div class="row g-4" *ngFor="let t of turnos">
+                <div class="card col-12 col-md-6 col-xl-4">
+                    <div class="card-header bg-transparent">
+                        <h5 class="card-title">Fecha: {{t.fechaturno | date: 'dd/MM/yyyy'}}   -  Horario: {{t.horaturno | date: 'HH:mm'}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text  separador" *ngIf="userType === 'paciente'">Dr/a: {{t.medico.apellido}}, {{t.medico.nombre}}</p>
+                        <p class="card-text separador" *ngIf="userType === 'medico'">Paciente: {{t.paciente.apellido}}, {{t.paciente.nombre}}</p>
+                        <p class="card-text separador">Sala: {{t.sala}}</p>
+                        <p class="card-text">Pagado: {{ t.pagado ? 'Pagado' : 'Sin pagar' }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-body-secondary">Estado: {{t.estado}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="user-historial col-12">
+            <h3>Historiales Médicos</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Descripción</th>
+                            <th scope="col">Tratamiento</th>
+                            <th scope="col" *ngIf="userType === 'paciente'">Médico</th>
+                            <th scope="col" *ngIf="userType === 'medico'">Paciente</th>
+                            <th scope="col">Fecha Inicio</th>
+                            <th scope="col">Fecha Finalización</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let h of historiales">
+                            <th>{{h.titulo}}</th>
+                            <td>{{h.descripcion}}</td>
+                            <td>{{h.tratamiento}}</td>
+                            <td *ngIf="userType === 'paciente'">{{h.medico.nombre}} {{h.medico.apellido}}</td>
+                            <td *ngIf="userType === 'medico'">{{h.paciente.nombre}} {{h.paciente.apellido}}</td>
+                            <td>{{h.fecha_Inicio | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{h.fecha_Fin | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{h.estado}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

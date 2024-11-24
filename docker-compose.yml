@@ -1,0 +1,115 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./client/final-project  # Asegúrate de que esta ruta sea correcta
+    ports:
+      - "4200:4200"  # Asegúrate de mapear correctamente el puerto 4200
+    networks:
+      - red-clinica
+
+  backend:
+    build:
+      context: ./server
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongo-primary:27017,fakeSecondary:27018/final-project-db?replicaSet=rs0
+    depends_on:
+      - mongo-primary
+    networks:
+      - red-clinica
+    ports:
+      - "3000:3000"
+
+  mongo-primary:
+    image: mongo:latest
+    container_name: mongo-primary
+    command: mongod --replSet rs0 --bind_ip_all
+    networks:
+      - red-clinica
+    ports:
+      - "27017:27017" # Exponemos el puerto del nodo primario
+    volumes:
+      - mongo-primary-data:/data/db # Datos persistentes para el nodo primario
+
+  mongo-secondary:
+    image: mongo:latest
+    container_name: mongo-secondary
+    command: mongod --replSet rs0 --bind_ip_all
+    networks:
+      - red-clinica
+    volumes:
+      - mongo-secondary-data:/data/db
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo-primary,mongo-secondary # Listar los nodos del set de réplicas
+      ME_CONFIG_MONGODB_REPLSET_NAME: rs0 # Nombre del set de réplicas
+      ME_CONFIG_BASICAUTH_USERNAME: admin # Usuario para acceso básico
+      ME_CONFIG_BASICAUTH_PASSWORD: admin123 # Contraseña para acceso básico
+    ports:
+      - "8081:8081" # Puerto para acceder a mongo-express
+    networks:
+      - red-clinica
+    depends_on:
+      - mongo-primary
+      - mongo-secondary
+  
+  mongo-backup:
+    image: ubuntu
+    container_name: mongo_backup
+    volumes:
+      - mongo_backup:/backup
+      - ./scripts:/scripts
+    entrypoint: ["/bin/bash", "-c", "cron && tail -f /dev/null"]
+    networks:
+      - red-clinica
+
+  mongo-exporter:
+    image: bitnami/mongodb-exporter:latest
+    container_name: mongo-exporter
+    environment:
+      - MONGODB_URI=mongodb://mongo-primary:27017
+    ports:
+      - "9216:9216"
+    networks:
+      - red-clinica
+    depends_on:
+      - mongo-primary
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - red-clinica
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3001:3000"  # Puerto para acceder a Grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: "admin"  # Contraseña para el usuario admin
+    networks:
+      - red-clinica
+    depends_on:
+      - prometheus
+
+networks:
+  red-clinica:
+
+volumes:
+  mongo-primary-data:
+    driver: local
+  mongo-secondary-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  mongo_backup:
+    driver: local

@@ -1,0 +1,49 @@
+<div class="container">
+    <h1 class="text-center my-4 text-uppercase">Cartilla médica</h1>
+    <div class="d-flex justify-content-center mb-4 buttons">
+        <button (click)="setBotonTipo('todos')"
+            [ngClass]="{'selected': tipoBusqueda === 'todos', 'unselected': tipoBusqueda !== 'todos'}">
+            Mostrar todos los medicos
+        </button>
+        <button (click)="setBotonTipo('especialidad')"
+            [ngClass]="{'selected': tipoBusqueda === 'especialidad', 'unselected': tipoBusqueda !== 'especialidad'}">
+            Especialidades médicas
+        </button>
+        <button (click)="setBotonTipo('nombre')"
+            [ngClass]="{'selected': tipoBusqueda === 'nombre', 'unselected': tipoBusqueda !== 'nombre'}">
+            Búsqueda por nombre
+        </button>
+    </div>
+    <div *ngIf="tipoBusqueda!='todos'">
+        <p>
+            Ingresa {{ tipoBusqueda === 'especialidad' ? 'la especialidad que quieres buscar' : 'el nombre o apellido del médico que quieres buscar' }}:
+          </p>
+        <div class="mb-4 search-bar">
+            <input type="text" [placeholder]="getPlaceholder()" [(ngModel)]="busquedaInput" (ngModelChange)="searchMedicos()" required>
+            <button (click)="searchMedicos()">Buscar</button>
+        </div>
+    </div>
+    <div>
+        <button (click)="agregarMedico()">Agregar medico</button>
+    </div>
+    <h3>Resultados</h3>
+        <p>Nº resultados encontrados: {{medicos.length}}</p>
+    <div class="results" *ngIf="medicos.length > 0">
+        <div class="row">
+            <div class="col-md-4" *ngFor="let m of medicos">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">Dr. {{m.apellido}}, {{m.nombre}}</h3>
+                        <h5 class="card-subtitle text-center mb-3">Especialidad: {{m.especialidad}}</h5>
+                        <p class="card-text"><strong>Ubicacion:</strong> {{m.domicilio}}</p>
+                        <p class="card-text"><strong>Contactos:</strong> </p>
+                        <ul>
+                            <li class="list-group-item separador" *ngFor="let contacto of m.contactos">
+                                <strong>{{contacto.tipo}}:</strong> {{ contacto.valor }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
