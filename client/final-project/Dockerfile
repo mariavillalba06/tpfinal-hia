@@ -1,7 +1,7 @@
 # Nginx inicia automáticamente
 # Usa una imagen base de Node.js para construir la app
 # Usa una imagen base de Node.js
-FROM node:18 as build
+FROM node:18 AS build
 
 # Establece el directorio de trabajo
 WORKDIR /app
