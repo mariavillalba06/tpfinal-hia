@@ -18,7 +18,7 @@ export class MedicoService {
         'Content-Type': 'application/json'
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/medico', httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/medico', httpOptions);
 
   }
 
@@ -33,7 +33,7 @@ export class MedicoService {
     //Convierte el objeto en formato JSON
     let body: any = JSON.stringify(med);
 
-    return this._http.post('http://localhost:3000/finalg5/medico', body, httpOptions);
+    return this._http.post('https://backend-hia.onrender.com/finalg5/medico', body, httpOptions);
   }
 
 
@@ -44,7 +44,7 @@ export class MedicoService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.get('http://localhost:3000/finalg5/medico/' + id, httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/medico/' + id, httpOptions);
   }
 
   //Obtener medico por dni
@@ -54,7 +54,7 @@ export class MedicoService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.get('http://localhost:3000/finalg5/medico/buscar/' + dni, httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/medico/buscar/' + dni, httpOptions);
   };
 
   //Editar medico por id, convierte el objeto en formato JSON
@@ -64,7 +64,7 @@ export class MedicoService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.put('http://localhost:3000/finalg5/medico/' + id, JSON.stringify(data), httpOptions);
+    return this._http.put('https://backend-hia.onrender.com/finalg5/medico/' + id, JSON.stringify(data), httpOptions);
   }
 
   //Eliminar medico por id
@@ -74,7 +74,7 @@ export class MedicoService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.delete('http://localhost:3000/finalg5/medico/' + id, httpOptions);
+    return this._http.delete('https://backend-hia.onrender.com/finalg5/medico/' + id, httpOptions);
   }
 
   public getMedicoByEspecialidad(especialidad: string): Observable<any> {
@@ -83,7 +83,7 @@ export class MedicoService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.get('http://localhost:3000/finalg5/medico/especialidad/' + especialidad, httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/medico/especialidad/' + especialidad, httpOptions);
   }
 
   getMedicoByNombreApellido(nombreapellido: string): Observable<any> {
@@ -92,6 +92,6 @@ export class MedicoService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.get('http://localhost:3000/finalg5/medico/nombreapellido/' + nombreapellido, httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/medico/nombreapellido/' + nombreapellido, httpOptions);
   }
 }

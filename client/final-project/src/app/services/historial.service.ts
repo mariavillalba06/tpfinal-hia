@@ -22,7 +22,7 @@ export class HistorialService {
       params: params
     };
 
-    return this._http.get('http://localhost:3000/finalg5/historiales', httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/historiales', httpOptions);
 
   }
 
@@ -31,7 +31,7 @@ export class HistorialService {
       headers: new HttpHeaders({
       })
     }
-    return this._http.get('http://localhost:3000/finalg5/historiales/paciente/' + pacienteId, httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/historiales/paciente/' + pacienteId, httpOptions);
   }
 
   public getHistorialByMedico(medicoId: string): Observable<any> {
@@ -39,7 +39,7 @@ export class HistorialService {
       headers: new HttpHeaders({
       })
     }
-    return this._http.get('http://localhost:3000/finalg5/historiales/medico/' + medicoId, httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/historiales/medico/' + medicoId, httpOptions);
   }
 
   public getHistorialById(id: string): Observable<any> {
@@ -47,7 +47,7 @@ export class HistorialService {
       headers: new HttpHeaders({
       })
     }
-    return this._http.get('http://localhost:3000/finalg5/historiales/' + id, httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/historiales/' + id, httpOptions);
   }
   public createHistorial(historial: Historial): Observable<any> {
 
@@ -59,7 +59,7 @@ export class HistorialService {
 
     let body: any = JSON.stringify(historial);
 
-    return this._http.post('http://localhost:3000/finalg5/historiales', body, httpOptions);
+    return this._http.post('https://backend-hia.onrender.com/finalg5/historiales', body, httpOptions);
   }
 
   public updateHistorial(historial: Historial): Observable<any> {
@@ -70,7 +70,7 @@ export class HistorialService {
     }
     let body: any = JSON.stringify(historial);
 
-    return this._http.put('http://localhost:3000/finalg5/historiales/' + historial._id, body, httpOption);
+    return this._http.put('https://backend-hia.onrender.com/finalg5/historiales/' + historial._id, body, httpOption);
   }
 
   public deleteHistorial(historial: Historial): Observable<any> {
@@ -78,6 +78,6 @@ export class HistorialService {
       headers: new HttpHeaders({
       }),
     }
-    return this._http.delete('http://localhost:3000/finalg5/historiales/' + historial._id, httpOption);
+    return this._http.delete('https://backend-hia.onrender.com/finalg5/historiales/' + historial._id, httpOption);
   }
 }

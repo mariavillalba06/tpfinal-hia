@@ -40,7 +40,7 @@ export class TurnoService {
       }),
     }
     let body:any = JSON.stringify(turnos);
-    return this._http.put('http://localhost:3000/finalg5/turno/vigencia', body, httpOptions);
+    return this._http.put('https://backend-hia.onrender.com/finalg5/turno/vigencia', body, httpOptions);
   }
 
      //buscar por turnos estado
@@ -50,13 +50,13 @@ export class TurnoService {
            'Content-Type': 'application/json' 
          }),
        }
-       return this._http.get('http://localhost:3000/finalg5/turno/estado/'+estado, httpOptions);
+       return this._http.get('https://backend-hia.onrender.com/finalg5/turno/estado/'+estado, httpOptions);
      }
     
 
   public deleteMany(turnos: Array<Turno>): Observable<any> {
     const ids = turnos.map(turno => turno._id);
-    const url = `http://localhost:3000/finalg5/turno/deletemany`;
+    const url = `https://backend-hia.onrender.com/finalg5/turno/deletemany`;
     return this._http.delete(url, { body: ids });
   }
  
@@ -67,7 +67,7 @@ export class TurnoService {
       }),
     }
     let body:any = JSON.stringify(turnos);
-    return this._http.put('http://localhost:3000/finalg5/turno/uppdate', body, httpOptions);
+    return this._http.put('https://backend-hia.onrender.com/finalg5/turno/uppdate', body, httpOptions);
   }
 
   public getLastTurno(): Observable<any> {
@@ -76,7 +76,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/last',httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/last',httpOptions);
   }
 
   public getAllTurno(): Observable<any> {
@@ -85,7 +85,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/all',httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/all',httpOptions);
   }
 
   public getTurno(): Observable<any> {
@@ -94,7 +94,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno',httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno',httpOptions);
   }
 
 
@@ -105,7 +105,7 @@ export class TurnoService {
       }),
     }
       let body:any = JSON.stringify(turno);
-    return this._http.post('http://localhost:3000/finalg5/turno', body, httpOptions);
+    return this._http.post('https://backend-hia.onrender.com/finalg5/turno', body, httpOptions);
   }
 
 
@@ -116,7 +116,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/id_medico/'+medico._id,httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/id_medico/'+medico._id,httpOptions);
   }
 
 
@@ -127,7 +127,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/id_paciente/'+paciente._id,httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/id_paciente/'+paciente._id,httpOptions);
   }
 
 
@@ -138,7 +138,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/medico/'+medico._id+'/paciente/'+paciente._id,httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/medico/'+medico._id+'/paciente/'+paciente._id,httpOptions);
   }
 
 
@@ -149,7 +149,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/fechaturno/'+fechaturno,httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/fechaturno/'+fechaturno,httpOptions);
   }
   
 
@@ -160,7 +160,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/sala/'+sala,httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/sala/'+sala,httpOptions);
   }
 
   
@@ -171,7 +171,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/enfermedad/'+enfermedad,httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/enfermedad/'+enfermedad,httpOptions);
   }
 
 
@@ -182,7 +182,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/tipoPago/'+tipoPago,httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/tipoPago/'+tipoPago,httpOptions);
   }
 
 
@@ -193,7 +193,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/pagado/'+pagado,httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/pagado/'+pagado,httpOptions);
   }
 
 
@@ -204,7 +204,7 @@ export class TurnoService {
       }),
     }     
       let body:any = JSON.stringify(turno);
-    return this._http.put('http://localhost:3000/finalg5/turno/id/'+turno._id, body, httpOptions);
+    return this._http.put('https://backend-hia.onrender.com/finalg5/turno/id/'+turno._id, body, httpOptions);
   }
 
 
@@ -215,7 +215,7 @@ export class TurnoService {
         'Content-Type': 'application/json'
       }),
     }
-    return this._http.delete('http://localhost:3000/finalg5/turno/id/'+idd, httpOptions);
+    return this._http.delete('https://backend-hia.onrender.com/finalg5/turno/id/'+idd, httpOptions);
   }
 
   public getTurnoPaciente(id:string): Observable<any> {
@@ -224,7 +224,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/id_paciente/'+id,httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/id_paciente/'+id,httpOptions);
   }
     
   public getTurnoMedico(id:string): Observable<any> {
@@ -233,7 +233,7 @@ export class TurnoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('http://localhost:3000/finalg5/turno/id_medico/'+id,httpOptions);
+    return this._http.get('https://backend-hia.onrender.com/finalg5/turno/id_medico/'+id,httpOptions);
   }
    
 }

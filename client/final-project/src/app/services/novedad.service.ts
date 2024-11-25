@@ -21,7 +21,7 @@ export class NovedadService {
           'Content-Type': 'application/json'
         })
       }
-      return this._http.get('http://localhost:3000/finalg5/novedades', httpOptions);
+      return this._http.get('https://backend-hia.onrender.com/finalg5/novedades', httpOptions);
     }
 
    // Obtener novedades por estado "pendiente" o "procesado"
@@ -31,7 +31,7 @@ export class NovedadService {
           'Content-Type': 'application/json'
         })
       }
-      return this._http.get('http://localhost:3000/finalg5/novedades/estado/' + estado, httpOptions);
+      return this._http.get('https://backend-hia.onrender.com/finalg5/novedades/estado/' + estado, httpOptions);
     }
 
     // Obtener novedad por ID
@@ -41,7 +41,7 @@ export class NovedadService {
           'Content-Type': 'application/json'
         })
       }
-      return this._http.get('http://localhost:3000/finalg5/novedades/' + id, httpOptions);
+      return this._http.get('https://backend-hia.onrender.com/finalg5/novedades/' + id, httpOptions);
 
       
     }
@@ -52,7 +52,7 @@ export class NovedadService {
           'Content-Type': 'application/json'
         })
       }
-      return this._http.get('http://localhost:3000/finalg5/novedades/' + tipo, httpOptions);
+      return this._http.get('https://backend-hia.onrender.com/finalg5/novedades/' + tipo, httpOptions);
     }
 
     //crear novedad
@@ -64,7 +64,7 @@ export class NovedadService {
       }
       let body = JSON.stringify(novedad); //pasar a JSON el objeto
       console.log(body);
-      return this._http.post('http://localhost:3000/finalg5/novedades', body, httpOptions);
+      return this._http.post('https://backend-hia.onrender.com/finalg5/novedades', body, httpOptions);
     }
 
     //editar novedad
@@ -75,7 +75,7 @@ export class NovedadService {
         })
       }
       let body = JSON.stringify(novedad); //pasar a JSON el objeto
-      return this._http.put('http://localhost:3000/finalg5/novedades/' + novedad._id, body, httpOptions);
+      return this._http.put('https://backend-hia.onrender.com/finalg5/novedades/' + novedad._id, body, httpOptions);
     }
 
     //eliminar novedad
@@ -85,7 +85,7 @@ export class NovedadService {
           'Content-Type': 'application/json'
         })
       }
-      return this._http.delete('http://localhost:3000/finalg5/novedades/' + id, httpOptions);
+      return this._http.delete('https://backend-hia.onrender.com/finalg5/novedades/' + id, httpOptions);
     }
 
    
