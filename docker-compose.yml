@@ -13,49 +13,49 @@ services:
       context: ./server
     environment:
       - NODE_ENV=production
-      - MONGO_URI=mongodb://mongo-primary:27017,fakeSecondary:27018/final-project-db?replicaSet=rs0
-    depends_on:
-      - mongo-primary
+      - MONGO_URI=mongodb+srv://mariavillalba:<gG6savcbetpUqPBq>@cluster0.qb6qp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+    #depends_on:
+     # - mongo-primary
     networks:
       - red-clinica
     ports:
       - "3000:3000"
 
-  mongo-primary:
-    image: mongo:latest
-    container_name: mongo-primary
-    command: mongod --replSet rs0 --bind_ip_all
-    networks:
-      - red-clinica
-    ports:
+  #mongo-primary:
+   # image: mongo:latest
+    #container_name: mongo-primary
+    #command: mongod --replSet rs0 --bind_ip_all
+    #networks:
+     # - red-clinica
+    #ports:
       - "27017:27017" # Exponemos el puerto del nodo primario
-    volumes:
-      - mongo-primary-data:/data/db # Datos persistentes para el nodo primario
+    #volumes:
+     # - mongo-primary-data:/data/db # Datos persistentes para el nodo primario
 
-  mongo-secondary:
-    image: mongo:latest
-    container_name: mongo-secondary
-    command: mongod --replSet rs0 --bind_ip_all
-    networks:
-      - red-clinica
-    volumes:
-      - mongo-secondary-data:/data/db
+  #mongo-secondary:
+   # image: mongo:latest
+    #container_name: mongo-secondary
+    #command: mongod --replSet rs0 --bind_ip_all
+    #networks:
+     # - red-clinica
+    #volumes:
+     # - mongo-secondary-data:/data/db
 
   mongo-express:
     image: mongo-express:latest
     container_name: mongo-express
     environment:
-      ME_CONFIG_MONGODB_SERVER: mongo-primary,mongo-secondary # Listar los nodos del set de réplicas
-      ME_CONFIG_MONGODB_REPLSET_NAME: rs0 # Nombre del set de réplicas
+      ME_CONFIG_MONGODB_SERVER: mongodb+srv://mariavillalba:<gG6savcbetpUqPBq>@cluster0.qb6qp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0 # Listar los nodos del set de réplicas
+     # ME_CONFIG_MONGODB_REPLSET_NAME: rs0 # Nombre del set de réplicas
       ME_CONFIG_BASICAUTH_USERNAME: admin # Usuario para acceso básico
       ME_CONFIG_BASICAUTH_PASSWORD: admin123 # Contraseña para acceso básico
     ports:
       - "8081:8081" # Puerto para acceder a mongo-express
     networks:
       - red-clinica
-    depends_on:
-      - mongo-primary
-      - mongo-secondary
+    #depends_on:
+     # - mongo-primary
+     # - mongo-secondary
   
   mongo-backup:
     image: ubuntu
@@ -71,13 +71,13 @@ services:
     image: bitnami/mongodb-exporter:latest
     container_name: mongo-exporter
     environment:
-      - MONGODB_URI=mongodb://mongo-primary:27017
+      - MONGODB_URI=mongodb+srv://mariavillalba:<gG6savcbetpUqPBq>@cluster0.qb6qp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
     ports:
       - "9216:9216"
     networks:
       - red-clinica
-    depends_on:
-      - mongo-primary
+    #depends_on:
+     # - mongo-primary
 
   prometheus:
     image: prom/prometheus:latest
