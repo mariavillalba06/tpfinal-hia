@@ -2,7 +2,7 @@ version: '3.8'
 services:
   frontend:
     container_name: contenedor-frontend
-    image: mariavillalba/frontend:latest
+    image: mariavillalba/client-final-project:latest
     ports:
       - "81:80"
     networks:
@@ -10,7 +10,7 @@ services:
 
   backend:
     container_name: contenedor-backend
-    image: mariavillalba/backend:latest
+    image: mariavillalba/server:latest
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongo-primary:27017/final-project-db
