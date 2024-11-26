@@ -1,6 +1,6 @@
 # Name the node stage "builder"
 #FROM node AS builder
-FROM node:16 AS builder
+FROM node:18 AS builder
 
 # Set working directory
 WORKDIR /app
