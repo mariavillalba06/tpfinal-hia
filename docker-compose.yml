@@ -2,7 +2,7 @@ version: '3.8'
 services:
   frontend:
     container_name: contenedor-frontend
-    image: mariavillalba/client-final-project:latest
+    image: mariavillalba/client-final-project2:latest
     ports:
       -  "4200:4200" 
     networks:
