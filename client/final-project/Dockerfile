@@ -20,7 +20,7 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 
 # Copy static assets from the builder stage
-COPY --from=builder /dist/final-project/browser/ .
+COPY --from=builder ./dist/final-project/browser/ .
 
 # Create custom Nginx configuration
 RUN echo 'server { listen 80; server_name localhost; location / { root /usr/share/nginx/html; try_files $uri $uri/ /index.html =404; index index.html index.htm; } }' > /etc/nginx/conf.d/default.conf
