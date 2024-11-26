@@ -4,7 +4,7 @@ services:
     container_name: contenedor-frontend
     image: mariavillalba/frontend:latest
     ports:
-      - "81":80"
+      - "81:80"
     networks:
       - red-clinica
 
