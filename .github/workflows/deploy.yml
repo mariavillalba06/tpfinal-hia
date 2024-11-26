@@ -44,4 +44,4 @@ jobs:
           context: ./client/final-project
           file: ./client/final-project/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/client/final-project:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/client-final-project:latest
