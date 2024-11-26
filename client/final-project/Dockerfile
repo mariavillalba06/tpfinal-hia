@@ -1,38 +1,20 @@
-# Name the node stage "builder"
-#FROM node AS builder
-FROM node:18 AS builder
+# Nginx inicia automáticamente
+# Usa una imagen base de Node.js para construir la app
+# Usa una imagen base de Node.js
+FROM node:18 as build
 
-# Set working directory
+# Establece el directorio de trabajo
 WORKDIR /app
 
-# Copy all files from the current directory to the working directory in the image
-#COPY . .
-
-# Install node modules and build assets
-#RUN npm i --force && npm run build
-
-# Copy package.json and install dependencies
+# Copia los archivos del proyecto y instala las dependencias
 COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the files and build the project
+# Copia el resto de los archivos del proyecto
 COPY . .
-RUN npm run build
 
-# Nginx stage for serving content
-FROM nginx:alpine
+# Expone el puerto 4200
+EXPOSE 4200
 
-# Set working directory to the nginx asset directory
-WORKDIR /usr/share/nginx/html
-
-# Remove default nginx static assets
-RUN rm -rf ./*
-
-# Copy static assets from the builder stage
-COPY --from=builder /app/dist/final-project .
-
-# Create custom Nginx configuration
-RUN echo 'server { listen 80; server_name localhost; location / { root /usr/share/nginx/html; try_files $uri $uri/ /index.html =404; index index.html index.htm; } }' > /etc/nginx/conf.d/default.conf
-
-# Containers run Nginx with global directives and daemon off
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+# Ejecuta el servidor de desarrollo de Angular
+CMD ["npm", "start"]
