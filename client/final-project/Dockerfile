@@ -1,14 +1,23 @@
 # Name the node stage "builder"
-FROM node AS builder
+#FROM node AS builder
+FROM node:16 AS builder
 
 # Set working directory
 WORKDIR /app
 
 # Copy all files from the current directory to the working directory in the image
-COPY . .
+#COPY . .
 
 # Install node modules and build assets
-RUN npm i --force && npm run build
+#RUN npm i --force && npm run build
+
+# Copy package.json and install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the files and build the project
+COPY . .
+RUN npm run build
 
 # Nginx stage for serving content
 FROM nginx:alpine
