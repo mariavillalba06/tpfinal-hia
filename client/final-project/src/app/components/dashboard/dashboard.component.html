@@ -111,7 +111,6 @@
                                 <td>{{pac.dni}}</td>
                                 <td>{{pac.domicilio}}</td> 
                                 <td class='td__actions'>
-                                    <button class='btn btn-primary' (click)="perfilPaciente(pac._id)">Ver más</button>
                                     <button class="btn btn-success button-crud" (click)="modificarPaciente(pac._id)">Modificar</button>
                                     <button class="btn btn-danger" type="submit" (click)="deletePaciente(pac._id)">Eliminar</button>
                                 </td>
@@ -175,7 +174,6 @@
                     <td>{{med.dni}}</td>
                     <td>{{med.contactos[0].tipo}}: {{med.contactos[0].valor}}</td>
                     <td class='td__actions'>
-                        <button class='btn btn-primary' (click)="perfilMedico(med._id)">Ver más</button>
                         <button class="btn btn-success button-crud" (click)="modificarMedico(med._id)">Modificar</button>
                         <button class="btn btn-danger" type="submit" (click)="deleteMedico(med._id)">Eliminar</button>
                     </td>
@@ -184,27 +182,4 @@
         </table>
         <a type="button" class="btn btn-primary" routerLink="/medico-form">Agregar Medico</a>
     </article>
-</section>
-
-<section class="m-3">
-    <h2>Novedades</h2>
-    <button class='btn btn-primary m-3' routerLink="/novedad-form" >Crear novedad</button>
-    <article class="d-flex" >
-        <div class="card m-3" style="width: 18rem;" *ngFor="let nov of novedades">
-            <div class="card-body" >
-                <img [src]="nov.imagen" class="card-img-top img-thumbnail" style="max-width: 300px" alt="...">
-                <h5 class="card-title">{{nov.titulo}}</h5>
-                <p class="card-text">{{nov.descripcion}}</p>
-                <small>{{nov.fecha_ini | date: 'longDate' }}</small>
-                <div class="mt-4">
-                <a routerLink="/dashboard"  class="card-link btn decline"(click)="eliminarNovedad(nov._id)">Eliminar</a>
-                </div> 
-            </div>
-        </div>
-        
-    </article>
-</section>
-
-<section class="m-2">
-    <app-public></app-public>
 </section>

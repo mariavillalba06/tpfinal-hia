@@ -19,7 +19,7 @@ export class AdministraService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.get('https://backend-hia.onrender.com/finalg5/administrativo', httpOptions);
+    return this._http.get('http://localhost:3000/finalg5/administrativo/finalg5/administrativo', httpOptions);
   };
 
   //obtener admin por dni
@@ -29,7 +29,7 @@ export class AdministraService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.get('https://backend-hia.onrender.com/finalg5/administrativo/' + dni, httpOptions);
+    return this._http.get('http://localhost:3000/finalg5/administrativo/finalg5/administrativo/' + dni, httpOptions);
   };
 
   //crear admin
@@ -40,7 +40,7 @@ export class AdministraService {
       })
     }
     let body = JSON.stringify(admin); //pasar a JSON el objeto
-    return this._http.post('https://backend-hia.onrender.com/finalg5/administrativo', body, httpOptions);
+    return this._http.post('http://localhost:3000/finalg5/administrativo/finalg5/administrativo', body, httpOptions);
   };
 
   //editar admin
@@ -51,7 +51,7 @@ export class AdministraService {
       })
     }
     let body = JSON.stringify(admin); //pasar a JSON el objeto
-    return this._http.put('https://backend-hia.onrender.com/finalg5/administrativo/' + admin._id, body, httpOptions);
+    return this._http.put('http://localhost:3000/finalg5/administrativofinalg5/administrativo/' + admin._id, body, httpOptions);
   };
 
   //eliminar admin
@@ -61,7 +61,7 @@ export class AdministraService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.delete('https://backend-hia.onrender.com/finalg5/administrativo/' + id, httpOptions);
+    return this._http.delete('http://localhost:3000/finalg5/administrativo/finalg5/administrativo/' + id, httpOptions);
   };
 
 }

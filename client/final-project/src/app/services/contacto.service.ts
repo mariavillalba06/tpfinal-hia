@@ -22,7 +22,7 @@ export class ContactoService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('https://backend-hia.onrender.com/finalg5/contacto',httpOptions);
+    return this._http.get('http://localhost:3000/finalg5/contacto',httpOptions);
 
   }
 
@@ -36,7 +36,7 @@ export class ContactoService {
          
       let body:any = JSON.stringify(cont);
     
-    return this._http.post('https://backend-hia.onrender.com/finalg5/contacto', body, httpOptions);
+    return this._http.post('http://localhost:3000/finalg5/contacto', body, httpOptions);
   }
 
 

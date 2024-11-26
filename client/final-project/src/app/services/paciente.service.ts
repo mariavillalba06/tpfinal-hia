@@ -17,7 +17,7 @@ export class PacienteService {
         'Content-Type': 'application/json' 
       }),
     }
-    return this._http.get('https://backend-hia.onrender.com/finalg5/paciente',httpOptions);
+    return this._http.get('http://localhost:3000/finalg5/administrativo/finalg5/paciente',httpOptions);
 
   }
   public getPacienteById(id:string):Observable<any>{
@@ -26,7 +26,7 @@ export class PacienteService {
       }),
       params: new HttpParams()
     }
-    return this._http.get('https://backend-hia.onrender.com/finalg5/paciente/'+id,httpOption);
+    return this._http.get('http://localhost:3000/finalg5/administrativo/finalg5/paciente/'+id,httpOption);
   }
 
   public addPaciente(paciente:Paciente):Observable<any>{
@@ -36,7 +36,7 @@ export class PacienteService {
       })
     }
     let body:any = JSON.stringify(paciente)
-    return this._http.post('https://backend-hia.onrender.com/finalg5/paciente',body,httpOptions);
+    return this._http.post('http://localhost:3000/finalg5/administrativo/finalg5/paciente',body,httpOptions);
   }
 
 
@@ -48,7 +48,7 @@ export class PacienteService {
       }),
     }
     let body:any = JSON.stringify(paciente);
-    return this._http.put('https://backend-hia.onrender.com/finalg5/paciente/'+paciente._id,body,httpOption);
+    return this._http.put('http://localhost:3000/finalg5/administrativo/finalg5/paciente/'+paciente._id,body,httpOption);
   }
   public delete(paciente:Paciente):Observable<any>{
     let httpOption={
@@ -56,7 +56,7 @@ export class PacienteService {
       }),
       params: new HttpParams()
     }
-    return this._http.delete('https://backend-hia.onrender.com/finalg5/paciente/'+paciente._id,httpOption);
+    return this._http.delete('http://localhost:3000/finalg5/administrativo/finalg5/paciente/'+paciente._id,httpOption);
   }
 
   public getPacienteByDni(dni: any): Observable<any> {
@@ -65,7 +65,7 @@ export class PacienteService {
         'Content-Type': 'application/json'
       })
     }
-    return this._http.get('https://backend-hia.onrender.com/finalg5/paciente/buscar/' + dni, httpOptions);
+    return this._http.get('http://localhost:3000/finalg5/administrativo/finalg5/paciente/buscar/' + dni, httpOptions);
   };
 
   public login(dni: Number, password: String): Observable<any> {
@@ -77,7 +77,7 @@ export class PacienteService {
 
     let body = JSON.stringify({dni: dni, password: password});
 
-    return this._http.post('https://backend-hia.onrender.com/finalg5/paciente/login', body, httpOptions);
+    return this._http.post('http://localhost:3000/finalg5/administrativo/finalg5/paciente/login', body, httpOptions);
   }
 
   public logout() {

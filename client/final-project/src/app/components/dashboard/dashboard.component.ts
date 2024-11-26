@@ -3,14 +3,12 @@ import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Administra } from '../../models/administra';
 import { AdministraService } from '../../services/administra.service';
-import { Contacto } from '../../models/contacto'
 import { Router, RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { Medico } from '../../models/medico';
 import { MedicoService } from '../../services/medico.service';
 import { Paciente } from '../../models/paciente';
 import { PacienteService } from '../../services/paciente.service';
-import { PublicComponent } from '../public/public.component';
 import { NovedadComponent } from '../novedad/novedad.component';
 import { NovedadFormComponent } from '../novedad-form/novedad-form.component';
 import { Novedades } from '../../models/novedades';
@@ -37,7 +35,7 @@ export type ChartOptions = {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, RouterModule, PublicComponent, NovedadComponent, NovedadFormComponent, NgApexchartsModule],
+  imports: [CommonModule, FormsModule, RouterLink, RouterModule, NgApexchartsModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })

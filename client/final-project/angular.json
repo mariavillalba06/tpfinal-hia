@@ -54,19 +54,18 @@
           "configurations": {
             "production": {
               "aot": true,
-              "baseHref": "/",
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "3MB",
-                  "maximumError": "4MB"
+                  "maximumWarning": "1mb",
+                  "maximumError": "1.5mb"
                 },
-              {
-                "type": "any",
-                "maximumWarning": "1MB",
-                "maximumError": "2MB"
-              }
-            ],
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
               "outputHashing": "all"
             },
             "development": {
@@ -109,8 +108,7 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              "src/_redirects"
+              "src/assets"
             ],
             "styles": [
               "src/styles.css"

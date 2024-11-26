@@ -12,14 +12,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 //Config
 app.use(express.json()); //Se declara a Express que puede hacer uso de archivos JSON.
-const corsOptions = {
-    origin: 'https://clinicahia.netlify.app/home',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-};
-
-app.use(cors(corsOptions)); // Aplicar configuración CORS
-
+app.use(cors({origin: 'http://localhost:4200'})); //Se declara a Express que use CORS para apuntar al cliente.
 
 //config token
 dotenv.config();
