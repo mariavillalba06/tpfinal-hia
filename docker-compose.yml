@@ -20,6 +20,7 @@ services:
       - red-clinica
     ports:
       - "3000:3000"
+  
   mongo-primary:
     image: mongo:latest
     container_name: mongo-primary
@@ -39,6 +40,7 @@ services:
       - red-clinica
     volumes:
       - mongo-secondary-data:/data/db
+  
   #mongo-primary:
    # image: mongo
     #ports:
@@ -73,12 +75,12 @@ services:
     image: mongo-express:latest
     container_name: mongo-express
     environment:
-      ME_CONFIG_MONGODB_SERVER: mongo-primary
-      ME_CONFIG_MONGODB_REPLSET_NAME: rs-lab-01
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: admin123
+      ME_CONFIG_MONGODB_SERVER: mongo-primary, mongo-secondary # Listar los nodos del set de réplicas
+      ME_CONFIG_MONGODB_REPLSET_NAME: rs0 # Nombre del set de réplicas
+      ME_CONFIG_BASICAUTH_USERNAME: admin # Usuario para acceso básico
+      ME_CONFIG_BASICAUTH_PASSWORD: admin123 # Contraseña para acceso básico
     ports:
-      - "8081:8081"
+      - "8081:8081" # Puerto para acceder a mongo-express
     networks:
       - red-clinica
     depends_on:
