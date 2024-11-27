@@ -13,43 +13,61 @@ services:
     image: mariavillalba/server:latest
     environment:
       - NODE_ENV=production
-      - MONGO_URI=mongodb://mongo-primary:27017/final-project-db
+      - MONGO_URI=mongodb://mongo-primary:27017,fakeSecondary:27018/final-project-db?replicaSet=rs0
     depends_on:
       - mongo-primary
     networks:
       - red-clinica
     ports:
       - "3000:3000"
-
   mongo-primary:
-    image: mongo
-    ports:
-      - 27017:27017
-    volumes:
-      - mongo-primary-data:/data/db
+    image: mongo:latest
+    container_name: mongo-primary
+    command: mongod --replSet rs0 --bind_ip_all
     networks:
       - red-clinica
-    command: mongod --replSet rs-lab-01
-
-  mongo-secondary:
-    image: mongo
     ports:
-      - 27018:27017
+      - "27017:27017" # Exponemos el puerto del nodo primario
+    volumes:
+      - mongo-primary-data:/data/db # Datos persistentes para el nodo primario
+  
+  mongo-secondary:
+    image: mongo:latest
+    container_name: mongo-secondary
+    command: mongod --replSet rs0 --bind_ip_all
+    networks:
+      - red-clinica
     volumes:
       - mongo-secondary-data:/data/db
-    networks:
-      - red-clinica
-    command: mongod --replSet rs-lab-01
-    depends_on:
-      - mongo-primary
+  #mongo-primary:
+   # image: mongo
+    #ports:
+     # - 27017:27017
+    #volumes:
+     # - mongo-primary-data:/data/db
+    #networks:
+     # - red-clinica
+    #command: mongod --replSet rs-lab-01
 
-  setup-rs:
-    image: "setup-rs"
-    networks:
-      - red-clinica
-    build: ./setup
-    depends_on:
-      - mongo-primary
+  #mongo-secondary:
+  # image: mongo
+   # ports:
+    #  - 27018:27017
+    #volumes:
+     # - mongo-secondary-data:/data/db
+    #networks:
+     # - red-clinica
+    #command: mongod --replSet rs-lab-01
+    #depends_on:
+     # - mongo-primary
+
+  #setup-rs:
+   # image: "setup-rs"
+    #networks:
+     # - red-clinica
+    #build: ./setup
+    #depends_on:
+     # - mongo-primary
 
   mongo-express:
     image: mongo-express:latest
