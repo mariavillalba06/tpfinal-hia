@@ -100,7 +100,19 @@ services:
     depends_on:
       - mongo-primary
       - mongosetup
-      
+ 
+  mongo-exporter:
+    image: bitnami/mongodb-exporter:latest
+    container_name: mongo-exporter
+    environment:
+      - MONGODB_URI=mongodb://mongo-primary:27017
+    ports:
+      - "9216:9216"
+    networks:
+      - red-clinica
+    depends_on:
+      - mongo-primary
+
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
@@ -108,7 +120,7 @@ services:
       - "9100:9100"
     networks:
       - red-clinica
-  
+
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
