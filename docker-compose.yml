@@ -78,17 +78,23 @@ services:
       - mongo-primary
       - mongo-secondary
   
+#  mongo-backup:
+#    image: mongo:latest
+#    container_name: mongo-backup
+#    command: >
+#      bash -c "
+#        until mongosh --host mongo-primary:27017 --eval 'print(\"waiting for connection...\")'; do
+#          sleep 2;
+#        done &&
+#        mongodump --host mongo-primary:27017 --out /backup"
   mongo-backup:
-    image: mongo:latest
+    build:
+      context: .
+      dockerfile: Dockerfile  # Ruta al Dockerfile personalizado
     container_name: mongo-backup
-    command: >
-      bash -c "
-        until mongosh --host mongo-primary:27017 --eval 'print(\"waiting for connection...\")'; do
-          sleep 2;
-        done &&
-        mongodump --host mongo-primary:27017 --out /backup"
     volumes:
       - mongo-backup-data:/backup
+#      - ./local-backups:/backup  # Persistencia local configurada
     networks:
       - red-clinica
     depends_on:
