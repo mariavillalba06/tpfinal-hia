@@ -1,10 +1,7 @@
-FROM mongo
+FROM mongo:latest
 
-# Create App Directory
-WORKDIR /usr/src/configs
+# Copia el script de inicialización al contenedor
+COPY init-replica.js /init-replica.js
 
-# Install App Dependencies
-COPY rsconf.js .
-COPY setup.sh .
-
-CMD ["./setup.sh"]
+# Comando por defecto para inicializar el replica set
+CMD mongo --host mongo-primary:27017 /init-replica.js
