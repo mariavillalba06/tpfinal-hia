@@ -32,7 +32,8 @@ services:
     #command: mongod --replSet rs0 --bind_ip_all
     ports:
       - "27017:27017"
-    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-primary"]
+#    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-primary"]
+    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "0.0.0.0"]
     volumes:
       - mongo-primary-data:/data/db
     networks:
@@ -43,7 +44,8 @@ services:
     container_name: mongo-secondary
     ports:
       - 27018:27017
-    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-secondary"]
+#    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-secondary"]
+    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "0.0.0.0"]
     #command: mongod --replSet rs0 --bind_ip_all
     networks:
      - red-clinica
@@ -55,7 +57,8 @@ services:
     container_name: mongo-secondary2
     ports:
       - 27019:27017
-    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-secondary2"]
+#    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-secondary2"]
+    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "0.0.0.0"]
     networks:
      - red-clinica
     volumes:
