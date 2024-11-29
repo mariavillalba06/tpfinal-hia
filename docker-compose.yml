@@ -201,6 +201,18 @@ services:
       - red-clinica
     depends_on:
       - prometheus
+  
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower-container
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=10 
+    depends_on:
+      - contenedor-backend   
+      - contenedor-frontend
+    restart: always
 
 networks:
   red-clinica:
