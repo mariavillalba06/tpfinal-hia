@@ -210,8 +210,8 @@ services:
     environment:
       - WATCHTOWER_POLL_INTERVAL=10 
     depends_on:
-      - contenedor-backend   
-      - contenedor-frontend
+      - backend   
+      - frontend
     restart: always
 
 networks:
