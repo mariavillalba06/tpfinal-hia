@@ -14,8 +14,8 @@ services:
   backend:
     build:
       context: ./server
-      #container_name: contenedor-backend
-      #image: mariavillalba/server:latest
+      container_name: contenedor-backend
+      image: mariavillalba/server:latest
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongo-primary:27017,mongo-secondary:27017,mongo-secondary2:27017/final-project-db?replicaSet=rs0
@@ -31,7 +31,8 @@ services:
     container_name: mongo-primary
     ports:
       - "27017:27017"
-    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-primary"]
+#    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-primary"]
+    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "0.0.0.0"]
     volumes:
       - mongo-primary-data:/data/db
     networks:
@@ -53,7 +54,8 @@ services:
     container_name: mongo-secondary2
     ports:
       - 27019:27017
-    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-secondary2"]
+#    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-secondary2"]
+    entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "0.0.0.0"]
     networks:
      - red-clinica
     volumes:
