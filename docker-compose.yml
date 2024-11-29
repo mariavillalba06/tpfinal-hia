@@ -4,8 +4,8 @@ services:
   frontend:
     build:
       context: ./client/final-project  # Asegúrate de que esta ruta sea correcta
-    #container_name: contenedor-frontend
-    #image: mariavillalba/client-final-project2:latest
+      container_name: contenedor-frontend
+      image: mariavillalba/client-final-project2:latest
     ports:
       - "4200:4200"  # Asegúrate de mapear correctamente el puerto 4200
     networks:
@@ -14,8 +14,8 @@ services:
   backend:
     build:
       context: ./server
-      #container_name: contenedor-backend
-      #image: mariavillalba/server:latest
+      container_name: contenedor-backend
+      image: mariavillalba/server:latest
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongo-primary:27017,mongo-secondary:27017,mongo-secondary2:27017/final-project-db?replicaSet=rs0
@@ -118,17 +118,18 @@ services:
       - mongosetup
  
   mongo-exporter:
-   image: bitnami/mongodb-exporter:latest
-   container_name: mongo-exporter
-   environment:
-    - MONGODB_URI=mongodb://mongo-primary:27017,mongo-secondary:27017,mongo-secondary2:27017/?replicaSet=rs0
-   ports:
-    - "9216:9216"
-   networks:
-    - red-clinica
-   command: ["--collect-all"]
-   depends_on:
-    - mongosetup
+    image: bitnami/mongodb-exporter:latest
+    container_name: mongo-exporter
+    environment:
+      MONGODB_URI: "mongodb://mongo-primary:27017,mongo-secondary:27017,mongo-secondary2:27017/final-project-db?replicaSet=rs0"
+    ports:
+      - "9216:9216"
+    networks:
+      - red-clinica
+    depends_on:
+      - mongo-primary
+      - mongo-secondary
+      - mongo-secondary2
     #depends_on:
     #  - mongo-primary
      # - mongo-secondary
