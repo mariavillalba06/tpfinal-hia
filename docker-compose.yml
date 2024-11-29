@@ -2,20 +2,20 @@ version: '3.8'
 
 services:
   frontend:
-    build:
-     context: ./client/final-project
-    #container_name: contenedor-frontend
-    #image: mariavillalba/client-final-project2:latest
+    #build:
+     #context: ./client/final-project
+    container_name: contenedor-frontend
+    image: mariavillalba/client-final-project2:latest
     ports:
       - "4200:4200"  # Asegúrate de mapear correctamente el puerto 4200
     networks:
       - red-clinica
 
   backend:
-    build:
-      context: ./server
-      container_name: contenedor-backend
-      image: mariavillalba/server:latest
+    #build:
+     # context: ./server
+    container_name: contenedor-backend
+    image: mariavillalba/server:latest
     environment:
       - NODE_ENV=production
       - MONGO_URI=mongodb://mongo-primary:27017,mongo-secondary:27017,mongo-secondary2:27017/final-project-db?replicaSet=rs0
