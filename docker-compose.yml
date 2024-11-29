@@ -213,6 +213,8 @@ services:
       - backend   
       - frontend
     restart: always
+    networks:
+      - red-clinica
 
 networks:
   red-clinica:
