@@ -3,7 +3,7 @@ version: '3.8'
 services:
   frontend:
     build:
-      context: ./client/final-project  # Asegúrate de que esta ruta sea correcta
+     context: ./client/final-project
     #container_name: contenedor-frontend
     #image: mariavillalba/client-final-project2:latest
     ports:
@@ -29,7 +29,6 @@ services:
   mongo-primary:
     image: mongo:latest
     container_name: mongo-primary
-    #command: mongod --replSet rs0 --bind_ip_all
     ports:
       - "27017:27017"
     entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-primary"]
@@ -44,7 +43,6 @@ services:
     ports:
       - 27018:27017
     entrypoint: ["mongod", "--replSet", "rs0", "--bind_ip", "localhost,mongo-secondary"]
-    #command: mongod --replSet rs0 --bind_ip_all
     networks:
      - red-clinica
     volumes:
@@ -114,18 +112,29 @@ services:
       - mongo-primary
       - mongosetup
  
+  #mongo-exporter:
+   #image: bitnami/mongodb-exporter:latest
+   #container_name: mongo-exporter
+   #environment:
+    #- MONGODB_URI=mongodb://mongo-primary:27017,mongo-secondary:27017,mongo-secondary2:27017/?replicaSet=rs0
+   #ports:
+    #- "9216:9216"
+   #networks:
+    #- red-clinica
+   #command: ["--collect-all"]
+   #depends_on:
+  #  - mongosetup
+  
   mongo-exporter:
-   image: bitnami/mongodb-exporter:latest
-   container_name: mongo-exporter
-   environment:
-    - MONGODB_URI=mongodb://mongo-primary:27017,mongo-secondary:27017,mongo-secondary2:27017/?replicaSet=rs0
-   ports:
-    - "9216:9216"
-   networks:
-    - red-clinica
-   command: ["--collect-all"]
-   depends_on:
-    - mongosetup
+    image: bitnami/mongodb-exporter:latest
+    container_name: mongo-exporter
+    environment:
+      - MONGODB_URI=mongodb://exporter:exporterPassword@mongo-primary:27017,mongo-secondary:27017,mongo-secondary2:27017/admin?replicaSet=rs0
+      - MONGODB_EXPORTER_OPTS=--discovering-mode
+    ports:
+      - "9216:9216"
+    networks:
+      - red-clinica
     #depends_on:
     #  - mongo-primary
      # - mongo-secondary
